@@ -1,4 +1,4 @@
-    <div class="todo {{ done ? 'done' : '' }}">
+    <div class="todo {{#if done }}done{{/if}}">
         <div class="display">
             <input class="check" type="checkbox" {{#if done }}checked="checked"{{/if}}>
             <div class="todo-content"></div>
