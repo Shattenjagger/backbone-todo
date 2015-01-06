@@ -29,6 +29,9 @@ require.config({
     }
 });
 
-require(['views/app'], function (AppView) {
+require(['backbone', 'views/app', 'collections/todos', 'routers/router'], function (Backbone, AppView, TodoCollection, Workspace) {
+    app.Todos = new TodoCollection;
+    new Workspace;
+    Backbone.history.start();
     new AppView;
 });

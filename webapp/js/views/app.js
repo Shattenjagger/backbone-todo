@@ -23,20 +23,18 @@ define(
                 this.$main = this.$('#main');
                 this.$todo_list = this.$('#todo-list');
 
-                this.Todos = new TodoCollection();
+                this.listenTo(app.Todos, 'add', this.addOne);
+                this.listenTo(app.Todos, 'reset', this.addAll);
+                this.listenTo(app.Todos, 'change:completed', this.filterOne);
+                this.listenTo(app.Todos, 'filter', this.filterAll);
+                this.listenTo(app.Todos, 'all', this.render);
 
-                this.listenTo(this.Todos, 'add', this.addOne);
-                this.listenTo(this.Todos, 'reset', this.addAll);
-                this.listenTo(this.Todos, 'change:completed', this.filterOne);
-                this.listenTo(this.Todos, 'filter', this.filterAll);
-                this.listenTo(this.Todos, 'all', this.render);
-
-                this.Todos.fetch();
+                app.Todos.fetch();
             },
             render: function () {
-                var completed = this.Todos.completed().length;
-                var remaining = this.Todos.remaining().length;
-                if (this.Todos.length) {
+                var completed = app.Todos.completed().length;
+                var remaining = app.Todos.remaining().length;
+                if (app.Todos.length) {
                     this.$main.show();
                     this.$footer.show();
                     this.$footer.html(this.template({
@@ -60,33 +58,33 @@ define(
             },
             addAll: function () {
                 this.$todo_list.html('');
-                this.Todos.each(this.addOne, this);
+                app.Todos.each(this.addOne, this);
             },
             filterOne: function (todo) {
                 todo.trigger('visible');
             },
             filterAll: function () {
-                this.Todos.each(this.filterOne, this);
+                app.Todos.each(this.filterOne, this);
             },
             newAttributes: function () {
                 return {
                     title: this.$input.val().trim(),
-                    order: this.Todos.nextOrder(),
+                    order: app.Todos.nextOrder(),
                     completed: false
                 };
             },
             createOnEnter: function (event) {
                 if (event.which != 13 || !this.$input.val().trim()) return;
-                this.Todos.create(this.newAttributes());
+                app.Todos.create(this.newAttributes());
                 this.$input.val('');
             },
             clearCompleted: function () {
-                _.invoke(this.Todos.completed(), 'destroy');
+                _.invoke(app.Todos.completed(), 'destroy');
                 return false;
             },
             toggleAllComplete: function () {
                 var completed = this.allCheckbox.checked;
-                this.Todos.each(function (todo) {
+                app.Todos.each(function (todo) {
                     todo.save({
                         completed: completed
                     });
