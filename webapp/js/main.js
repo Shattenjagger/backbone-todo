@@ -32,6 +32,10 @@ require.config({
 require(['backbone', 'views/app', 'collections/todos', 'routers/router'], function (Backbone, AppView, TodoCollection, Workspace) {
     app.Todos = new TodoCollection;
     new Workspace;
-    Backbone.history.start();
+    Backbone.history || (Backbone.history = new Backbone.History());
+    Backbone.history.start({
+        pushState: true,
+        root: '/'
+    });
     new AppView;
 });
