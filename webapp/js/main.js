@@ -22,10 +22,6 @@ require.config({
     }
 });
 
-require(['views/todo'], function () {
-    console.log("We're here");
-});
-
-//require(['views/app'], function (AppView) {
-//    var app_view = new AppView;
-//})
+require(['views/app'], function (AppView) {
+    var app_view = new AppView;
+})
