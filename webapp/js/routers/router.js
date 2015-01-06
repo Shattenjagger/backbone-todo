@@ -8,6 +8,7 @@ define(
                 '*filter': 'setFilter'
             },
             setFilter: function (param) {
+                console.log('Set filter: ' + param);
                 app.TodoFilter = param;
                 app.Todos.trigger('filter');
             }
