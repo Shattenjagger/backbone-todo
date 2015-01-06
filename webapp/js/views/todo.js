@@ -9,7 +9,8 @@ define(
     function ($, _, Backbone, Handlebars, todosTemplate) {
         var template = Handlebars.compile(todosTemplate);
         var context = {
-            'test-data': "Hello, world!"
+            'test-data': "Hello, world!",
+            'done': true
         };
         var html = template(context);
         console.log(html);
