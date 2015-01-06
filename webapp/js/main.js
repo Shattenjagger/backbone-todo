@@ -3,7 +3,7 @@ require.config({
     paths: {
         jquery: 'libs/jquery/jquery-2.1.3.min.js',
         underscore: 'libs/underscore/underscore-min',
-        handlebars: 'libs/handlebars/handlebars.runtime-v2.0.0.js',
+        handlebars: 'libs/handlebars/handlebars.runtime-v2.0.0',
         backbone: 'libs/backbone/backbone-min',
         text: 'libs/requirejs/text'
     },
@@ -23,8 +23,8 @@ require.config({
 
 require(['views/todo'], function () {
     console.log("We're here");
-})
+});
 
-require(['views/app'], function (AppView) {
-    var app_view = new AppView;
-})
+//require(['views/app'], function (AppView) {
+//    var app_view = new AppView;
+//})
