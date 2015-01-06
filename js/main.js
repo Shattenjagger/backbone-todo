@@ -1,3 +1,26 @@
-/**
- * Created by guldan on 1/6/15.
- */
+require.config({
+    baseUrl: './js',
+    paths: {
+        jquery: 'libs/jquery/jquery-2.1.3.min',
+        underscore: 'libs/underscore/underscore-min',
+        handlebars: 'libs/handlebars/handlebars.runtime-v2.0.0',
+        backbone: 'libs/backbone/backbone-min',
+        text: 'libs/requirejs/text'
+    },
+    shim: {
+        underscore: {
+            exports: '_'
+        },
+        backbone: {
+            exports: 'Backbone'
+        },
+        handlebars: {
+            deps: ['jquery'],
+            exports: 'Handlebars'
+        }
+    }
+});
+
+require(['views/app'], function (AppView) {
+    var app_view = new AppView;
+})
