@@ -1,3 +1,5 @@
+var app = app || {};
+
 require.config({
     baseUrl: './js',
     paths: {
@@ -28,5 +30,5 @@ require.config({
 });
 
 require(['views/app'], function (AppView) {
-    var app_view = new AppView;
+    new AppView;
 });

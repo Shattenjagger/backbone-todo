@@ -24,7 +24,6 @@ define(
                 this.$todo_list = this.$('#todo-list');
 
                 this.Todos = new TodoCollection();
-                this.TodoFilter = '';
 
                 this.listenTo(this.Todos, 'add', this.addOne);
                 this.listenTo(this.Todos, 'reset', this.addAll);
@@ -47,7 +46,7 @@ define(
                     }));
                     this.$('#filters li a')
                         .removeClass('selected')
-                        .filter('[href="#/' + this.TodoFilter + '"]')
+                        .filter('[href="#/' + (app.TodoFilter || '') + '"]')
                         .addClass('selected');
                 } else {
                     this.$main.hide();
