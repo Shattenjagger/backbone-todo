@@ -6,7 +6,7 @@ define(
         var TodoModel = Backbone.Model.extend({
             defaults: {
                 title: '',
-                completed: 'false'
+                completed: false
             },
             toggle: function () {
                 this.save({ completed: !this.get('completed') });
