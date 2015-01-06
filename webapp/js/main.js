@@ -5,6 +5,7 @@ require.config({
         underscore: 'libs/underscore/underscore-min',
         handlebars: 'libs/handlebars/handlebars-v2.0.0',
         backbone: 'libs/backbone/backbone-min',
+        localstorage: 'libs/backbone/backbone.localStorage-min',
         text: 'libs/requirejs/text'
     },
     shim: {
@@ -18,17 +19,18 @@ require.config({
         handlebars: {
             deps: ['jquery'],
             exports: 'Handlebars'
+        },
+        localstorage: {
+            deps: ['backbone'],
+            exports: 'LocalStorage'
         }
     }
 });
 
-require(['models/todo'], function (TodoModel) {
-    var model = new TodoModel;
-    console.log(model);
-    model.set({completed: true});
-    console.log(model);
+require(['collections/todos'], function (TodoList) {
+    var todo_list = new TodoList;
 })
 
-require(['views/app'], function (AppView) {
-    var app_view = new AppView;
-})
+//require(['views/app'], function (AppView) {
+//    var app_view = new AppView;
+//})
