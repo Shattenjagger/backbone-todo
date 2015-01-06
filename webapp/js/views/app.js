@@ -41,6 +41,7 @@ define(
                     this.$main.show();
                     this.$footer.show();
                     this.$footer.html(this.template({
+                        single_remaining: remaining === 1,
                         completed: completed,
                         remaining: remaining
                     }));
