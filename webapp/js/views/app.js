@@ -47,7 +47,7 @@ define(
                     }));
                     this.$('#filters li a')
                         .removeClass('selected')
-                        .filter('[href="#/' + (app.TodoFilter || '') + '"]')
+                        .filter('[href="/' + (app.TodoFilter || '') + '"]')
                         .addClass('selected');
                 } else {
                     this.$main.hide();
@@ -105,7 +105,7 @@ define(
             linkClicked: function (e, param) {
                 console.log('Linkclicked called');
                 e.preventDefault();
-                app.Workspace.navigate('/' + param);
+                app.Workspace.navigate('/' + param, { trigger: true });
             }
         });
     }
