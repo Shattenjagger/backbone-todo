@@ -7,12 +7,16 @@ define(
         'text!templates/todos.html'
     ],
     function ($, _, Backbone, Handlebars, todosTemplate) {
-        var template = Handlebars.compile(todosTemplate);
-        var context = {
-            'test-data': "Hello, world!",
-            'done': true
-        };
-        var html = template(context);
-        console.log(html);
+        var TodoView = Backbone.View.extend({
+            tagName: 'li',
+            template: Handlebars.compile(todosTemplate),
+            events: {
+                'click .check': 'toggleDone',
+                'dblclick div.todo-content': 'edit',
+                'click span.todo-destroy': 'clear',
+                'keypress .todo-input': 'updateOnEnter'
+            }
+        });
+        return TodoView;
     }
 );
