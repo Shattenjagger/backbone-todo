@@ -35,8 +35,8 @@ define(
                 this.Todos.fetch();
             },
             render: function () {
-                var completed = this.Todos.completed();
-                var remaining = this.Todos.remaining();
+                var completed = this.Todos.completed().length;
+                var remaining = this.Todos.remaining().length;
                 if (this.Todos.length) {
                     this.$main.show();
                     this.$footer.show();
