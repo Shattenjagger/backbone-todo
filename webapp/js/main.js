@@ -25,7 +25,7 @@ require.config({
 require(['models/todo'], function (TodoModel) {
     var model = new TodoModel;
     console.log(model);
-    model.completed = true;
+    model.set({completed: true});
     console.log(model);
 })
 
