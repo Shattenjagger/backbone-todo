@@ -27,12 +27,6 @@ require.config({
     }
 });
 
-require(['collections/todos'], function (TodoList) {
-    var todo_list = new TodoList;
-    todo_list.create({ title: 'Hello, world!', completed: true });
-    console.log(todo_list);
-})
-
-//require(['views/app'], function (AppView) {
-//    var app_view = new AppView;
-//})
+require(['views/app'], function (AppView) {
+    var app_view = new AppView;
+});
