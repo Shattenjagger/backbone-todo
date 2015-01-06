@@ -8,7 +8,7 @@ define(
     ],
     function ($, _, Backbone, Handlebars, todosTemplate) {
         console.log(Handlebars);
-        var source = $("test-template").html();
+        var source = $("#test-template").html();
         console.log(source);
         //var template = Handlebars.compile(todosTemplate);
         var template = Handlebars.compile(source);
