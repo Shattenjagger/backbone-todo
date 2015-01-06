@@ -14,7 +14,10 @@ define(
             events: {
                 'keypress #new-todo': 'createOnEnter',
                 'click #clearCompleted': 'clearCompleted',
-                'click #toggle-all': 'toggleAllComplete'
+                'click #toggle-all': 'toggleAllComplete',
+                'click #all-link': 'allLinkClicked',
+                'click #active-link': 'activeLinkClicked',
+                'click #completed-link': 'completedLinkClicked'
             },
             initialize: function () {
                 this.allCheckbox = this.$('#toggle-all')[0];
@@ -89,6 +92,20 @@ define(
                         completed: completed
                     });
                 });
+            },
+            allLinkClicked: function (e) {
+                this.linkClicked(e, '');
+            },
+            activeLinkClicked: function (e) {
+                this.linkClicked(e, 'active');
+            },
+            completedLinkClicked: function (e) {
+                this.linkClicked(e, 'completed');
+            },
+            linkClicked: function (e, param) {
+                console.log('Linkclicked called');
+                e.preventDefault();
+                app.Workspace.navigate('/' + param);
             }
         });
     }
