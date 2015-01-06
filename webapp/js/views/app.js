@@ -10,6 +10,11 @@ define(
         return Backbone.View.extend({
             el: "#todoapp",
             template: Handlebars.compile(statsTemplate),
+            events: {
+                'keypress #new-todo': 'createOnEnter',
+                'click #clearCompleted': 'clearCompleted',
+                'click #toggle-all': 'toggleAllComplete'
+            },
             initialize: function () {
                 this.allCheckbox = this.$('#toggle-all')[0];
                 this.$input = this.$('#new-todo');
@@ -21,6 +26,14 @@ define(
 
                 this.listenTo(this.Todos, 'add', this.addOne);
                 this.listenTo(this.Todos, 'reset', this.addAll);
+                //this.listenTo(this.Todos, 'change:completed', this.filterOne);
+                //this.listenTo(this.Todos, 'filter', this.filterAll);
+                //this.listenTo(this.Todos, 'all', this.render);
+
+                this.Todos.fetch();
+            },
+            render: function () {
+
             },
             addOne: function (todo) {
                 var view = new TodoView({model: todo});
