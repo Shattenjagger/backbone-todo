@@ -1,12 +1,13 @@
 define(
     [
+        'underscore',
         'backbone',
         'handlebars',
         'views/todo',
         'collections/todos',
         'text!templates/stats.html'
     ],
-    function (Backbone, Handlebars, TodoView, TodoCollection, statsTemplate) {
+    function (_, Backbone, Handlebars, TodoView, TodoCollection, statsTemplate) {
         return Backbone.View.extend({
             el: "#todoapp",
             template: Handlebars.compile(statsTemplate),
@@ -47,8 +48,7 @@ define(
                         .removeClass('selected')
                         .filter('[href="#/' + this.TodoFilter + '"]')
                         .addClass('selected');
-                }
-                else {
+                } else {
                     this.$main.hide();
                     this.$footer.hide();
                 }
@@ -61,8 +61,37 @@ define(
             addAll: function () {
                 this.$todo_list.html('');
                 this.Todos.each(this.addOne, this);
+            },
+            filterOne: function (todo) {
+                todo.trigger('visible');
+            },
+            filterAll: function () {
+                this.Todos.each(this.filterOne, this);
+            },
+            newAttributes: function () {
+                return {
+                    title: this.$input.val().trim(),
+                    order: this.Todos.nextOrder(),
+                    completed: false
+                };
+            },
+            createOnEnter: function (event) {
+                if (event.which != 13 || !this.$input.val().trim()) return;
+                this.Todos.create(this.newAttributes());
+                this.$input.val('');
+            },
+            clearCompleted: function () {
+                _.invoke(this.Todos.completed(), 'destroy');
+                return false;
+            },
+            toggleAllComplete: function () {
+                var completed = this.allCheckbox.checked;
+                this.Todos.each(function (todo) {
+                    todo.save({
+                        completed: completed
+                    });
+                });
             }
-
         });
     }
 );
