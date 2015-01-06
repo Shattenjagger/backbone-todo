@@ -1,10 +1,8 @@
-    <div class="todo {{#if done }}done{{/if}}">
-        <div class="display">
-            <input class="check" type="checkbox" {{#if done }}checked="checked"{{/if}}>
-            <div class="todo-content"></div>
-            <span class="todo-destroy"></span>
-        </div>
-        <div class="edit">
-            <input class="todo-input" type="text" value=""/>
-        </div>
+<div class="view">
+    <div class="display">
+        <input class="toggle" type="checkbox" {{#if completed }}checked{{/if}}>
+        <label>{{ title }}</label>
+        <button class="destroy"></button>
     </div>
+    <input class="edit" type="text" value="{{ title }}"/>
+</div>
