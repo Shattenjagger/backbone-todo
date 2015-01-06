@@ -1,22 +1,28 @@
 define(
     [
-        'jquery',
-        'underscore',
         'backbone',
         'handlebars',
         'text!templates/todos.html'
     ],
-    function ($, _, Backbone, Handlebars, todosTemplate) {
-        var TodoView = Backbone.View.extend({
+    function (Backbone, Handlebars, todosTemplate) {
+        return Backbone.View.extend({
             tagName: 'li',
             template: Handlebars.compile(todosTemplate),
             events: {
                 'click .check': 'toggleDone',
-                'dblclick div.todo-content': 'edit',
+                'dblclick label': 'edit',
                 'click span.todo-destroy': 'clear',
-                'keypress .todo-input': 'updateOnEnter'
+                'keypress .edit': 'updateOnEnter',
+                'blur .edit': 'close'
+            },
+            initialize: function () {
+                this.listenTo(this.model, 'change', this.render);
+            },
+            render: function () {
+                this.$el.html(this.template(this.model.toJSON()));
+                this.$input = this.$('.edit');
+                return this;
             }
         });
-        return TodoView;
     }
 );
