@@ -22,6 +22,13 @@ require.config({
     }
 });
 
+require(['models/todo'], function (TodoModel) {
+    var model = new TodoModel;
+    console.log(model);
+    model.completed = true;
+    console.log(model);
+})
+
 require(['views/app'], function (AppView) {
     var app_view = new AppView;
 })

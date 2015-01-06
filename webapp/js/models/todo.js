@@ -3,14 +3,13 @@ define(
         'backbone'
     ],
     function (Backbone) {
-        var TodoModel = Backbone.View.extend({
-            tagName: 'li',
-            template: Handlebars.compile(todosTemplate),
-            events: {
-                'click .check': 'toggleDone',
-                'dblclick div.todo-content': 'edit',
-                'click span.todo-destroy': 'clear',
-                'keypress .todo-input': 'updateOnEnter'
+        var TodoModel = Backbone.Model.extend({
+            defaults: {
+                title: '',
+                completed: 'false'
+            },
+            toggle: function () {
+                this.save({ completed: !this.get('completed') });
             }
         });
         return TodoModel;
