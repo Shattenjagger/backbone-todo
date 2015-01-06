@@ -7,7 +7,7 @@ define(
     function (Backbone, LocalStorage, TodoModel) {
         var TodoList = Backbone.Collection.extend({
             model: TodoModel,
-            localStorage: LocalStorage
+            localStorage: new LocalStorage('todos-backbone')
         });
         return TodoList;
     }
