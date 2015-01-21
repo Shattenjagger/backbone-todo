@@ -5,12 +5,12 @@ define(
     function (Backbone) {
         return Backbone.Router.extend({
             routes: {
-                '*filter': 'setFilter'
+                '*page': 'setPage'
             },
-            setFilter: function (param) {
-                console.log('Set filter: ' + param);
-                app.TodoFilter = param;
-                app.Todos.trigger('filter');
+            setPage: function (param) {
+                console.log('Set page: ' + param);
+                //app.TodoFilter = param;
+                //app.Todos.trigger('filter');
             }
         });
     }
