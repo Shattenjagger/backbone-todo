@@ -9,8 +9,8 @@ define(
             },
             setPage: function (param) {
                 console.log('Set page: ' + param);
-                //app.TodoFilter = param;
-                //app.Todos.trigger('filter');
+                app.TodoFilter = param;
+                app.Todos.trigger('filter');
             }
         });
     }
